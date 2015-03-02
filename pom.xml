@@ -36,7 +36,7 @@
                     <systemPropertyVariables>
                         <selenide.baseUrl>http://rzn.eldorado.ru</selenide.baseUrl>
                         <browser>chrome</browser>
-                        <webdriver.chrome.driver>C:\programs\chromedriver.exe</webdriver.chrome.driver>
+                        <remote>http://maxaymer:4444/wd/hub</remote>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
