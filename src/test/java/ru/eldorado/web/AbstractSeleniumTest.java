@@ -5,11 +5,9 @@ import com.codeborne.selenide.junit.BrowserStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.openqa.selenium.Proxy;
 import ru.eldorado.web.pages.AbstractPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.setProxy;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.junit.Assert.assertEquals;
 
