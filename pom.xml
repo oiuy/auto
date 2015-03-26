@@ -22,6 +22,32 @@
             <version>2.16</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>de.hybris.platform.virtualjdbc</groupId>
+            <artifactId>virtualjdbc</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.hybris.platform.virtualjdbc.server</groupId>
+            <artifactId>virtualjdbcserver</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.hybris.vjdbc</groupId>
+            <artifactId>virtualjdbc</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -34,9 +60,10 @@
                     <parallel>methods</parallel>
                     <threadCount>10</threadCount>
                     <systemPropertyVariables>
-                        <selenide.baseUrl>http://rzn.eldorado.ru</selenide.baseUrl>
+                        <selenide.baseUrl>http://10.0.1.140:9001</selenide.baseUrl>
                         <browser>chrome</browser>
-                        <remote>http://maxaymer:4444/wd/hub</remote>
+                        <!--<remote>http://maxaymer:4444/wd/hub</remote>-->
+                        <webdriver.chrome.driver>chromedriver.exe</webdriver.chrome.driver>
                     </systemPropertyVariables>
                     <argLine>-Dfile.encoding=utf-8</argLine>
                 </configuration>
