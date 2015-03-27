@@ -112,6 +112,7 @@ public class CartPage extends AbstractPage {
                 order.setAttribute(Order.SUBTOTAL, subTotalPrice());
                 order.setAttribute(Order.DELIVERYMODE, "pickup");
                 order.setAttribute(Order.TOTALPRICE, totalPrice());
+                order.setAttribute(Order.PRODUCTNUMBER, Integer.toString(numberOfProduct(Order.PRODUCTID)));
                 totalBlock.findElement(By.className("successBttnRP")).click();
                 if(cartPopup.isDisplayed()){
                     System.out.println("Cart popup: "+cartPopup.getText());

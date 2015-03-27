@@ -52,7 +52,6 @@ public class SubCategoryPage extends AbstractPage {
             order.setAttribute(Order.CREATEDATE, dateFormat.format(date).toString());
             order.setAttribute(Order.PRODUCTID, productCode(product));
             order.setAttribute(Order.PRODUCTPRICE, productPrice(product));
-            order.setAttribute(Order.PRODUCTNUMBER, "1");
             order.setAttribute(Order.PRODUCTNAME, product.findElement(By.className("itemTitle")).getText().trim());
             product.findElement(By.className(ADD_TO_CART)).click();
             return url();
