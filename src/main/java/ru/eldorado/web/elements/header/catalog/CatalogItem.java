@@ -28,8 +28,10 @@ public class CatalogItem extends AbstractElement {
 
     public String linkClickByName(String name) {
         SelenideElement link = byName(name);
+        String href = link.getAttribute("href");
         link.click();
-        return link.getAttribute("href");
+
+        return href;
     }
 
     public void hover() {
