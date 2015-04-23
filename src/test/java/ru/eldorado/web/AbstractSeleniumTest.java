@@ -1,17 +1,22 @@
 package ru.eldorado.web;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit.BrowserStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.eldorado.web.conditions.CheckRedirect;
+import ru.eldorado.web.conditions.UrlContains;
 import ru.eldorado.web.pages.AbstractPage;
+import ru.eldorado.web.pages.WithNavigationPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.url;
-import static org.junit.Assert.assertEquals;
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class AbstractSeleniumTest {
+
+    public static final int TIME_OUT = 20;
 
     @Rule
     public BrowserStrategy browserStrategy = new BrowserStrategy();
@@ -26,8 +31,8 @@ public abstract class AbstractSeleniumTest {
 
     }
 
-    public <T> T openPageAndRightRegion(String relativeOrAbsoluteUrl, Class<? extends AbstractPage> pageObjectClassClass) {
-        AbstractPage page = openPage(relativeOrAbsoluteUrl, pageObjectClassClass);
+    public <T> T openPageAndRightRegion(String relativeOrAbsoluteUrl, Class<? extends WithNavigationPage> pageObjectClassClass) {
+        WithNavigationPage page = openPage(relativeOrAbsoluteUrl, pageObjectClassClass);
         if (page.headerPanel.headerRegion.regionConfirmPopup.isDisplayed()) {
             page.headerPanel.headerRegion.regionConfirmPopup.clickYes();
         }
@@ -39,11 +44,19 @@ public abstract class AbstractSeleniumTest {
         return (T) open(relativeOrAbsoluteUrl, pageObjectClassClass);
     }
 
+    public <T> T pageByClass(Class<? extends AbstractPage> pageObjectClassClass) {
+        return (T) page(pageObjectClassClass);
+    }
+
     public void checkRedirect(String expectUrl) {
-        String actualUrl = url();
-        if (!expectUrl.startsWith("http:") && !expectUrl.startsWith("https:") && !expectUrl.startsWith("file:")) {
-            expectUrl = Configuration.baseUrl + expectUrl;
-        }
-        assertEquals(expectUrl, actualUrl);
+        driverWait().until(CheckRedirect.urlContains(expectUrl));
+    }
+
+    public void urlContains(String expectUrl) {
+        driverWait().until(UrlContains.urlContains(expectUrl));
+    }
+
+    public WebDriverWait driverWait() {
+        return new WebDriverWait(getWebDriver(), TIME_OUT);
     }
 }

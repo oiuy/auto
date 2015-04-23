@@ -22,16 +22,9 @@
             <version>2.16</version>
         </dependency>
 
-
         <dependency>
             <groupId>de.hybris.platform.virtualjdbc</groupId>
             <artifactId>virtualjdbc</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.hybris.platform.virtualjdbc.server</groupId>
-            <artifactId>virtualjdbcserver</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -47,7 +40,6 @@
             <version>2.2</version>
         </dependency>
 
-
     </dependencies>
 
     <build>
@@ -61,9 +53,12 @@
                     <threadCount>10</threadCount>
                     <systemPropertyVariables>
                         <selenide.baseUrl>http://10.0.1.140:9001</selenide.baseUrl>
+                        <host>10.0.1.140</host>
+                        <port>9001</port>
+                        <vjdbc.user>admin</vjdbc.user>
+                        <vjdbc.password>PlanBPassword2015!</vjdbc.password>
                         <browser>chrome</browser>
-                        <!--<remote>http://maxaymer:4444/wd/hub</remote>-->
-                        <webdriver.chrome.driver>chromedriver.exe</webdriver.chrome.driver>
+                        <remote>http://maxaymer:4444/wd/hub</remote>
                     </systemPropertyVariables>
                     <argLine>-Dfile.encoding=utf-8</argLine>
                 </configuration>
