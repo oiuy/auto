@@ -8,8 +8,6 @@ import ru.eldorado.web.elements.AbstractElement;
 import static org.junit.Assert.assertTrue;
 
 public class CartTotalPart extends AbstractElement {
-    private static final String FREE = "бесплатно";
-
     @FindBy(how = How.CSS, css = ".totals-delivery-label")
     private SelenideElement delivery;
 
