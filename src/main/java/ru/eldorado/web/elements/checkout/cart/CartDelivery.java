@@ -7,8 +7,8 @@ import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.AbstractElement;
 
 public class CartDelivery extends AbstractElement {
-    private static final String PICKUP = "Самовывоз";
-    private static final String DELIVERY = "Доставка.*";
+    private static final String PICKUP = "РЎР°РјРѕРІС‹РІРѕР·";
+    private static final String DELIVERY = "Р”РѕСЃС‚Р°РІРєР°.*";
 
     @FindBy(how = How.ID, id = "delivery_radio_pickup-styler")
     private SelenideElement pickUp;
