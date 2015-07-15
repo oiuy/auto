@@ -1,7 +1,6 @@
 package ru.eldorado.web.pages.checkout;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.base.SelectElement;
@@ -9,7 +8,6 @@ import ru.eldorado.web.elements.checkout.pickup.ScrollBar;
 import ru.eldorado.web.elements.checkout.pickup.ShopList;
 import ru.eldorado.web.elements.checkout.pickup.ShopView;
 import ru.eldorado.web.pages.AbstractPage;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class PickupPage extends AbstractPage {
     @FindBy(how = How.CSS, css = ".addressConfirmSubmitButton")
@@ -26,12 +24,12 @@ public class PickupPage extends AbstractPage {
     @FindBy(how = How.ID, id = "listWrapper")
     public ShopList shopList;
 
-    //Хайбрис:
+    //Выбранный магазин для Хайбрис:
     @FindBy(how = How.CSS, css = "#rightList > .item[style='']")
     public ShopView shopView;
 
-    //Битрикс:
-    @FindBy(how = How.CSS, css = "pickupListRightSide") ///!!!!
+    //Выбранный магазин для Битрикс:
+    @FindBy(how = How.CSS, css = ".pickupListRightSide")
     public ShopView shopViewBitrix;
 
     @FindBy(how = How.CSS, css = ".scrollbar")

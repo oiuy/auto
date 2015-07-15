@@ -3,14 +3,15 @@ package ru.eldorado.web;
  * Created by OsipovI on 03.07.2015.
  */
 
+import org.junit.After;
 import org.junit.Test;
 import ru.eldorado.web.elements.catalog.CatalogGoodItem;
 import ru.eldorado.web.pages.MainPage;
 import ru.eldorado.web.pages.catalog.SearchResultsPage;
-import ru.eldorado.web.pages.checkout.AuthorizationPage;
-import ru.eldorado.web.pages.checkout.CartPage;
-import ru.eldorado.web.pages.checkout.PickupPage;
-import ru.eldorado.web.pages.checkout.SummaryPage;
+import ru.eldorado.web.pages.checkout.*;
+import ru.eldorado.web.utils.NumberWriter;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -26,13 +27,14 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "test@mail.com";
+    private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
+    private static String ORDER_NUM = "";
 
     @Test //Самовывоз с локального склада:
     public void pickupOrderCreation() throws InterruptedException {
 
         //Главная страница
         MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
-
         //ищем товар по н/н
         mainPage.findItem(ITEM_ID);
 
@@ -83,7 +85,17 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         summaryPage.setPhoneNumber(PHONE_NUM);
         summaryPage.setEmail(EMAIL);
         //Жмем "Подтвердить"
-        summaryPage.submitButton.click();
+        summaryPage.submit();
+
+        //Последняя страница
+        ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
+        ORDER_NUM = thankYouPage.getOrderNumberBitrix();
+    }
+
+    @After
+    public void printOut () throws FileNotFoundException {
+        NumberWriter writer = new NumberWriter();
+        writer.writeOut(OUT_FILE, ORDER_NUM);
     }
 
 }
