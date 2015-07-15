@@ -8,13 +8,22 @@ import ru.eldorado.web.elements.AbstractElement;
 import ru.eldorado.web.utils.HybrisProps;
 
 public class CatalogGoodItem extends AbstractElement {
-    private static final String IN_BASKET = "inBasket";
+    //товар уже в корзине для Хайбрис:
+    // private static final String IN_BASKET = "inBasket";
+
+    //товар уже в корзине для Битрикс:
+    private static final String IN_BASKET = "alreadyInCart";
 
     @FindBy(how = How.CSS, css = ".addToCart")
     private SelenideElement addToCart;
 
+    //Цена товара для Хайбриса:
     @FindBy(how = How.CSS, css = ".itemPriceNew")
     private SelenideElement price;
+
+    //Цена товара для Битрикса:
+    @FindBy(how = How.CSS, css = ".discountPrice")
+    private SelenideElement priceBitrix;
 
     @FindBy(how = How.CSS, css = ".itemTitle")
     private SelenideElement title;
@@ -26,7 +35,7 @@ public class CatalogGoodItem extends AbstractElement {
 
     public int getPrice() {
         try {
-            return Integer.valueOf(price.getText().replaceAll("[^0-9]", ""));
+            return Integer.valueOf(priceBitrix.getText().replaceAll("[^0-9]", ""));
         } catch (NumberFormatException e) {
             throw new AssertionError("Can't find price for product");
         }

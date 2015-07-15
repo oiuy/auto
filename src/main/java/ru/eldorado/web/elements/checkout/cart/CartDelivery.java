@@ -10,8 +10,21 @@ public class CartDelivery extends AbstractElement {
     private static final String PICKUP = "Самовывоз";
     private static final String DELIVERY = "Доставка.*";
 
+    //Самовывоз для Хайбрис
     @FindBy(how = How.ID, id = "delivery_radio_pickup-styler")
     private SelenideElement pickUp;
+
+    //Самовывоз для Битркис
+    @FindBy(how = How.ID, id = "delivery_radio_26-styler")
+    private SelenideElement getPickUpBitrix;
+
+    //Доставки для Битрикс
+    @FindBy(how = How.ID, id = "delivery_radio_36-styler")
+    private  SelenideElement deliveryMkadBitrix;
+
+    @FindBy(how = How.ID, id = "delivery_radio_8-styler")
+    private SelenideElement deliveryFarBitrix;
+
 
     public boolean isPickUp() {
         return getSelf().findElement(By.className("checkedBlock")).
@@ -24,6 +37,10 @@ public class CartDelivery extends AbstractElement {
     }
 
     public void choosePickUp() {
-        pickUp.click();
+        getPickUpBitrix.click();
+    }
+
+    public void chooseDelivery() {
+        deliveryMkadBitrix.click();
     }
 }

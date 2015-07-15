@@ -7,4 +7,7 @@ import ru.eldorado.web.elements.AbstractElement;
 public class HeaderLogoBlock extends AbstractElement {
     @FindBy(how = How.CSS, css = ".miniCart")
     public MiniCart miniCart;
+
+    @FindBy(how = How.CSS, css = ".headerCart")
+    public MiniCart miniCartBitrix;
 }

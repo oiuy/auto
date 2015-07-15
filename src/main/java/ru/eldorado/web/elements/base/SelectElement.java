@@ -12,4 +12,6 @@ public class SelectElement extends AbstractElement {
     public String getValue() {
         return hidden.getAttribute("value");
     }
+
+    public void setValue (String value) { hidden.selectOption(value); }
 }

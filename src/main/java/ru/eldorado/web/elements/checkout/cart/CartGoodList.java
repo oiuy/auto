@@ -36,4 +36,5 @@ public class CartGoodList extends AbstractElement {
 
         return 0;
     }
+
 }

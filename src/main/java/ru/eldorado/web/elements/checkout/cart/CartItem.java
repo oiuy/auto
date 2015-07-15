@@ -16,4 +16,6 @@ public class CartItem extends AbstractElement {
     public int getCount() {
         return Integer.valueOf(count.val());
     }
+
+    public void setCount(String value) {count.setValue(value); }
 }

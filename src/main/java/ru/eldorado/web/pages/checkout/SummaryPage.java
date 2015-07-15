@@ -24,6 +24,9 @@ public class SummaryPage extends AbstractPage {
     @FindBy(how = How.CSS, css = ".selfDeliveryButton input[type='submit']")
     private SelenideElement submit;
 
+    @FindBy(how = How.CSS, css = ".orderConfirmSubmitButton")
+    public SelenideElement submitButton;
+
     public void setFirstName(String firstName) {
         this.firstName.setValue(firstName);
     }
