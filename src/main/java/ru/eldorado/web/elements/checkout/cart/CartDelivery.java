@@ -6,25 +6,29 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.AbstractElement;
 
-public class CartDelivery extends AbstractElement {
-    private static final String PICKUP = "РЎР°РјРѕРІС‹РІРѕР·";
-    private static final String DELIVERY = "Р”РѕСЃС‚Р°РІРєР°.*";
+import java.util.List;
 
-    //РЎР°РјРѕРІС‹РІРѕР· РґР»СЏ РҐР°Р№Р±СЂРёСЃ
+public class CartDelivery extends AbstractElement {
+    private static final String PICKUP = "Самовывоз";
+    private static final String DELIVERY = "Доставка.*";
+
+    //Самовывоз для Хайбрис
     @FindBy(how = How.ID, id = "delivery_radio_pickup-styler")
     private SelenideElement pickUp;
 
-    //РЎР°РјРѕРІС‹РІРѕР· РґР»СЏ Р‘РёС‚СЂРєРёСЃ
+    //Самовывоз для Битркис
     @FindBy(how = How.ID, id = "delivery_radio_26-styler")
     private SelenideElement getPickUpBitrix;
 
-    //Р”РѕСЃС‚Р°РІРєРё РґР»СЏ Р‘РёС‚СЂРёРєСЃ
-    @FindBy(how = How.ID, id = "delivery_radio_36-styler")
+    //Доставка для Битрикс
+    @FindBy(how = How.ID, id = "delivery_radio_35-styler")
     private  SelenideElement deliveryMkadBitrix;
 
-    @FindBy(how = How.ID, id = "delivery_radio_8-styler")
-    private SelenideElement deliveryFarBitrix;
+    @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
+    private SelenideElement selectFrame;
 
+    @FindBy(how = How.ID, id ="cusel-scroll-self_delivery_city_select")
+    private CartCityList cityList;
 
     public boolean isPickUp() {
         return getSelf().findElement(By.className("checkedBlock")).
@@ -42,5 +46,10 @@ public class CartDelivery extends AbstractElement {
 
     public void chooseDelivery() {
         deliveryMkadBitrix.click();
+    }
+
+    public void selectCity(String title) {
+        selectFrame.click();
+        cityList.findCity(title);
     }
 }

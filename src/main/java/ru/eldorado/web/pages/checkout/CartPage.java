@@ -22,15 +22,4 @@ public class CartPage extends WithNavigationPage {
     @FindBy(how = How.ID, id = "cartItemPopup")
     public CartPopup cartPopup;
 
-    @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
-    public SelenideElement selectFrame;
-
-    @FindBy(how = How.XPATH, xpath = "//div[@id='cusel-scroll-self_delivery_city_select']/span[2]")
-    public SelenideElement citySelect;
-
-   public void selectCity () {
-       selectFrame.click();
-       citySelect.click();
-    }
-
 }

@@ -36,7 +36,7 @@ public class PickupPage extends AbstractPage {
     private ScrollBar scrollBar;
 
     public void findShop(String address) {
-        if (shopList.searchAddress(address))
+        if (shopList.isAddressPresents(address))
         { return; }
         else {
             scrollBar.scrollDown();

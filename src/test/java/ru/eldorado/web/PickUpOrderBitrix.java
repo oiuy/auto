@@ -19,75 +19,85 @@ import static org.junit.Assert.assertEquals;
 public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
     private final static String ITEM_ID = "71055750";
+    private final static String ITEM_ID2 = "71042152";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
-    private final static String SHOP_ADDRESS = "РўРљ В«Р›-153В», Р‘СЂР°С‚РёСЃР»Р°РІСЃРєР°СЏ, СѓР». Р›СЋР±Р»РёРЅСЃРєР°СЏ, Рґ.153";
-    private final static String FIRST_NAME = "РРІР°РЅ";
-    private final static String LAST_NAME = "РђРІС‚РѕС‚РµСЃС‚";
+    private final static String CITY = "Москва";
+    private final static String SHOP_ADDRESS = "ТК «Л-153», Братиславская, ул. Люблинская, д.153";
+    private final static String FIRST_NAME = "Иван";
+    private final static String LAST_NAME = "Автотест";
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "test@mail.com";
     private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
+
     private static String ORDER_NUM = "";
 
-    @Test //РЎР°РјРѕРІС‹РІРѕР· СЃ Р»РѕРєР°Р»СЊРЅРѕРіРѕ СЃРєР»Р°РґР°:
+    @Test //Самовывоз с локального склада:
     public void pickupOrderCreation() throws InterruptedException {
 
-        //Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°
+        //Главная страница
         MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
-        //РёС‰РµРј С‚РѕРІР°СЂ РїРѕ РЅ/РЅ
+        //ищем товар по н/н
         mainPage.findItem(ITEM_ID);
 
-        //РЎС‚СЂР°РЅРёС†Р° СЃ СЂРµР·СѓР»СЊС‚Р°С‚Р°РјРё РїРѕРёСЃРєР°
+        //Страница с результатами поиска
         SearchResultsPage resultsPage = pageByClass(SearchResultsPage.class);
-        //РґРѕР±Р°РІР»СЏРµРј С‚РѕРІР°СЂ РІ РєРѕСЂР·РёРЅСѓ
+        //добавляем товар в корзину
         CatalogGoodItem product = resultsPage.goodsList.addFirstToCart();
-        //РїСЂРѕРІРµСЂСЏРµРј, РїСѓСЃС‚Р° Р»Рё РєРѕСЂР·РёРЅР°
+        int itemsPrice = product.getPrice(); //запоминаем цену товара
+
+        //Чтобы найти и добавить в корзину ещё один товар:
+      /*  resultsPage.findItem(ITEM_ID2); // ищем товар по н/н
+        product = resultsPage.goodsList.addFirstToCart(); // добавляем его в корзину
+        itemsPrice = itemsPrice + product.getPrice(); //добавляем цену товара в сумму заказа*/
+
+        //проверяем, пуста ли корзина
         assertFalse(resultsPage.headerLogoBlock.miniCartBitrix.isBasketEmpty());
-        //СЃРІРµСЂСЏРµРј СЃСѓРјРјСѓ РєРѕСЂР·РёРЅС‹ Рё СЃС‚РѕРёРјРѕСЃС‚СЊ С‚РѕРІР°СЂР°
-        assertEquals(product.getPrice(), resultsPage.headerLogoBlock.miniCartBitrix.basketCost());
-        // РїРµСЂРµС…РѕРґРёРј РІ РєРѕСЂР·РёРЅСѓ
+        //сверяем сумму корзины и стоимость товара
+        assertEquals(itemsPrice, resultsPage.headerLogoBlock.miniCartBitrix.basketCost());
+        // переходим в корзину
         resultsPage.headerLogoBlock.miniCartBitrix.goToCart();
         urlContains("/personal/basket");
 
-        //РљРѕСЂР·РёРЅР°
+        //Корзина
         CartPage cartPage = pageByClass(CartPage.class);
-        //РІС‹Р±РёСЂР°РµРј РІР°СЂРёР°РЅС‚ РґРѕСЃС‚Р°РІРєРё:
-        cartPage.deliveryBox.choosePickUp(); //СЃР°РјРѕРІС‹РІРѕР·
-        //РІС‹Р±РёСЂР°РµРј РіРѕСЂРѕРґ РґР»СЏ СЃР°РјРѕРІС‹РІРѕР·Р°
-        cartPage.selectCity(); //Р‘Р«Р”Р›РћРљРћР”, РРЎРџР РђР’РРўР¬!
-        //Р¶РјРµРј РєРЅРѕРїРєСѓ "РћС„РѕСЂРјРёС‚СЊ Р·Р°РєР°Р·"
+        //выбираем вариант получения товара:
+        cartPage.deliveryBox.choosePickUp(); //самовывоз
+        //cartPage.deliveryBox.chooseDelivery(); //доставка
+        //выбираем город для самовывоза
+        cartPage.deliveryBox.selectCity(CITY);
+        //жмем кнопку "Оформить заказ"
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
 
-        //РЎС‚СЂР°РЅРёС†Р° Р°РІС‚РѕСЂРёР·Р°С†РёРё
+        //Страница авторизации
         AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
-        //Р’РѕР№С‚Рё:
+        //Войти:
         //authorizationPage.login(USER_NAME , PASSWORD);
-        //РљСѓРїРёС‚СЊ Р±РµР· Р°РІС‚РѕСЂРёР·Р°С†РёРё:
+        //Купить без авторизации:
         authorizationPage.setFocusOnRightBock();
         authorizationPage.buyWithoutRegistration();
-        //РїСЂРѕРІРµСЂСЏРµРј СЂРµРґРёСЂРµРєС‚ РЅР° СЃС‚СЂР°РЅРёС†Сѓ РІС‹Р±РѕСЂР° РјР°РіР°Р·РёРЅР°:
-        urlContains("personal/order_self_delivery"); //РµСЃР»Рё СЃР°РјРѕРІС‹РІРѕР·
-        //РЎС‚СЂР°РЅРёС†Р° РІС‹Р±РѕСЂР° РјР°РіР°Р·РёРЅР°
+        //проверяем редирект на страницу выбора магазина:
+        urlContains("personal/order_self_delivery"); //если самовывоз
+        //Страница выбора магазина
         PickupPage pickupPage = pageByClass(PickupPage.class);
-        pickupPage.findShop(SHOP_ADDRESS); //РІС‹Р±РёСЂР°РµРј РЅСѓР¶РЅС‹Р№ РјР°РіР°Р·РёРЅ РїРѕ Р°РґСЂРµСЃСѓ
-//        pickupPage.shopView.collectFromHereClick(); //Р¶РјРµРј РєРЅРѕРїРєСѓ "Р—Р°Р±РµСЂСѓ РѕС‚СЃСЋРґР°"
-        pickupPage.shopViewBitrix.collectFromHereClick();
+        pickupPage.findShop(SHOP_ADDRESS); //выбираем нужный магазин по адресу
+        pickupPage.shopViewBitrix.collectFromHereClick(); //жмем кнопку "Заберу отсюда"
         urlContains("step=sd_confirm");
 
-        //РЎС‚СЂР°РЅРёС†Р° РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ
+        //Страница подтверждения
         SummaryPage summaryPage = pageByClass(SummaryPage.class);
-        //Р—Р°РїРѕР»РЅСЏРµРј РїРѕР»СЏ
+        //Заполняем поля
         summaryPage.setFirstName(FIRST_NAME);
         summaryPage.setLastName(LAST_NAME);
         summaryPage.setPhoneCode(PHONE_CODE);
         summaryPage.setPhoneNumber(PHONE_NUM);
         summaryPage.setEmail(EMAIL);
-        //Р–РјРµРј "РџРѕРґС‚РІРµСЂРґРёС‚СЊ"
+        //Жмем "Подтвердить"
         summaryPage.submit();
 
-        //РџРѕСЃР»РµРґРЅСЏСЏ СЃС‚СЂР°РЅРёС†Р°
+        //Последняя страница
         ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
         ORDER_NUM = thankYouPage.getOrderNumberBitrix();
     }

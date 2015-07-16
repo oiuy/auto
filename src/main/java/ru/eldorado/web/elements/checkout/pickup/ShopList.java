@@ -23,7 +23,7 @@ public class ShopList extends AbstractElement {
         throw new AssertionError("Can't find address: " + address);
     }
 
-    public boolean searchAddress(String address) {
+    public boolean isAddressPresents(String address) {
         for (ShopItem shop : shops) {
             if (shop.isThis(address)) {
                 shop.click();

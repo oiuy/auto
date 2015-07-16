@@ -8,7 +8,7 @@ import ru.eldorado.web.elements.AbstractElement;
 import java.util.List;
 
 public class CartGoodList extends AbstractElement {
-    @FindBy(how = How.CSS, css = ".basketBlockRow")
+    @FindBy(how = How.CSS, css = ".basketBlock")
     private List<SelenideElement> items;
 
     public boolean isCartEmpty() {
@@ -17,23 +17,21 @@ public class CartGoodList extends AbstractElement {
 
     public boolean isProductPresent(String productCode) {
         for (SelenideElement item : items) {
-            CartItem cartItem = initContainer(item, CartItem.class);
-            if (cartItem.getCode().equals(productCode)) {
+            CartGoodItem cartGoodItem = initContainer(item, CartGoodItem.class);
+            if (cartGoodItem.getCode().equals(productCode)) {
                 return true;
             }
         }
-
         return false;
     }
 
     public int numberOfProduct(String productCode) {
         for (SelenideElement item : items) {
-            CartItem cartItem = initContainer(item, CartItem.class);
-            if (cartItem.getCode().equals(productCode)) {
-                return cartItem.getCount();
+            CartGoodItem cartGoodItem = initContainer(item, CartGoodItem.class);
+            if (cartGoodItem.getCode().equals(productCode)) {
+                return cartGoodItem.getCount();
             }
         }
-
         return 0;
     }
 
