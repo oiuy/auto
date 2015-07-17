@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
     private final static String ITEM_ID = "71055750";
-    private final static String ITEM_ID2 = "71042152";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
@@ -64,20 +63,17 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         CartPage cartPage = pageByClass(CartPage.class);
         //выбираем вариант получения товара:
         cartPage.deliveryBox.choosePickUp(); //самовывоз
-        //cartPage.deliveryBox.chooseDelivery(); //доставка
         //выбираем город для самовывоза
-        cartPage.deliveryBox.selectCity(CITY);
+        cartPage.deliveryBox.cityList.findCity(CITY);
         //жмем кнопку "Оформить заказ"
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
 
         //Страница авторизации
         AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
-        //Войти:
-        //authorizationPage.login(USER_NAME , PASSWORD);
         //Купить без авторизации:
-        authorizationPage.setFocusOnRightBock();
-        authorizationPage.buyWithoutRegistration();
+        authorizationPage.setFocusOnRightBock(); //выбрали правый блок на странице
+        authorizationPage.buyWithoutRegistration(); //нажали кнопку "Купить без авторизации"
         //проверяем редирект на страницу выбора магазина:
         urlContains("personal/order_self_delivery"); //если самовывоз
         //Страница выбора магазина
