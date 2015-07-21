@@ -52,8 +52,8 @@
                     <parallel>methods</parallel>
                     <threadCount>10</threadCount>
                     <systemPropertyVariables>
-                        <selenide.baseUrl>http://int1.eldorado-qa.services.lenvendo.ru</selenide.baseUrl>
-                        <host>http://int1.eldorado-qa.services.lenvendo.ru</host>
+                        <selenide.baseUrl>http://int2.eldorado-qa.services.lenvendo.ru</selenide.baseUrl>
+                        <host>http://int2.eldorado-qa.services.lenvendo.ru</host>
                         <port></port>
                         <vjdbc.user>admin</vjdbc.user>
                         <vjdbc.password>PlanBPassword2015!</vjdbc.password>

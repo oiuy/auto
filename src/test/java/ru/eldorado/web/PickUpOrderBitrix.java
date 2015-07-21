@@ -21,13 +21,14 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
     private final static String ITEM_ID = "71055750";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
-    private final static String CITY = "Москва";
+    private final static String CITY = "Клин";
     private final static String SHOP_ADDRESS = "ТК «Л-153», Братиславская, ул. Люблинская, д.153";
     private final static String FIRST_NAME = "Иван";
     private final static String LAST_NAME = "Автотест";
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "test@mail.com";
+    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
     private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
 
     private static String ORDER_NUM = "";

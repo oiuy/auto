@@ -28,12 +28,13 @@ public class CartCityList extends AbstractElement {
     }
 
     public void findCity(String cityName) {
-        for (int i=1; i <=citiesList.size(); i++)
+        for (int i=1; i <= citiesList.size(); i = i++)
         {if (searcher(cityName, i)){
             return;
-        } else {scrollDown(i*45);
-                searcher(cityName, i+1);
+        } else {scrollDown(i*43);
+                searcher(cityName, i++);
         }}
+        throw new AssertionError("City: " + cityName + " not found!");
     }
 
     public boolean searcher (String title, int index) {
