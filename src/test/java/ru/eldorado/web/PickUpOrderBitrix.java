@@ -23,7 +23,7 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
     private final static String PASSWORD = "";
     private final static String CITY = "Клин";
     private final static String SHOP_ADDRESS = "ТК «Л-153», Братиславская, ул. Люблинская, д.153";
-    private final static String FIRST_NAME = "Иван";
+    private final static String FIRST_NAME = "Имя";
     private final static String LAST_NAME = "Автотест";
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";

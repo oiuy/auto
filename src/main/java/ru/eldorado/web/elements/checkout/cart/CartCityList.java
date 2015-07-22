@@ -31,7 +31,7 @@ public class CartCityList extends AbstractElement {
         for (int i=1; i <= citiesList.size(); i = i++)
         {if (searcher(cityName, i)){
             return;
-        } else {scrollDown(i*43);
+        } else {scrollDown(i*46);
                 searcher(cityName, i++);
         }}
         throw new AssertionError("City: " + cityName + " not found!");
