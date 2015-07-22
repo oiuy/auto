@@ -21,15 +21,12 @@ public class AuthorizationPage extends AbstractPage {
     @FindBy(how = How.CSS, css = ".addToCartBigCP")
     private SelenideElement loginButton;
 
-    public void setFocusOnRightBock() {
-        rightBlock.setSelected(true);
-    }
-
     public void buyWithoutRegistration() {
+        rightBlock.setSelected(true);
         orderNoRegistration.click();
     }
 
-    public void login (String userName, String password) {
+    public void logIn(String userName, String password) {
         loginField.setValue(userName);
         passwordField.setValue(password);
         loginButton.click();
