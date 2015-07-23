@@ -9,9 +9,8 @@ import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.AbstractElement;
 
 import java.util.List;
-
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static java.sql.DriverManager.getDriver;
+
 
 public class CartGoodItem extends AbstractElement {
     @FindBy(how = How.CSS, css = ".countProd")
@@ -42,6 +41,7 @@ public class CartGoodItem extends AbstractElement {
             {check.click();
              return;}
         }
+        throw new AssertionError("There's no " + type + " for item ¹:" + this.getCode());
     }
 
 }

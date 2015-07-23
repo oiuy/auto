@@ -58,7 +58,6 @@ public class CartGoodList extends AbstractElement {
                 return;
             }
         }
-        throw new AssertionError("There's no:" + type + "fot item ¹:" + product);
     }
 
 }

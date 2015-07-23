@@ -19,16 +19,16 @@ import static org.junit.Assert.assertEquals;
 public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
     private final static String ITEM_ID = "71055750";
-    private final static String ITEM_ID2 = "71042152";
+    //private final static String ITEM_ID2 = "71042152";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
     private final static String SHOP_ADDRESS = "ТК «Л-153», Братиславская, ул. Люблинская, д.153";
-    private final static String FIRST_NAME = "Иван";
-    private final static String LAST_NAME = "Автотест";
+    private final static String FIRST_NAME = "Авто";
+    private final static String LAST_NAME = "Тест";
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
-    private final static String EMAIL = "test@mail.com";
+    private final static String EMAIL = "999test@mail.com";
     //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
     private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
 
@@ -49,7 +49,7 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         int itemsPrice = product.getPrice(); //запоминаем цену товара
 
         //Чтобы найти и добавить в корзину ещё один товар:
-        resultsPage.findItem(ITEM_ID2); // ищем товар по н/н
+      /*  resultsPage.findItem(ITEM_ID2); // ищем товар по н/н
         product = resultsPage.goodsList.addFirstToCart(); // добавляем его в корзину
         itemsPrice = itemsPrice + product.getPrice(); //добавляем цену товара в сумму заказа*/
 
@@ -63,19 +63,18 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
         //Корзина
         CartPage cartPage = pageByClass(CartPage.class);
-        cartPage.cartGoodList.setProductCount(ITEM_ID, "3"); //устанавилваем количество товара ITEM_ID
-        cartPage.cartGoodList.selectAdditionalService(ITEM_ID2, "express"); //выбираем ЭС для товара ITEM_ID2
-        //выбираем вариант получения товара:
-        cartPage.deliveryBox.choosePickUp(); //самовывоз
+        cartPage.cartGoodList.setProductCount(ITEM_ID, "3"); //Выбираем количество товара ITEM_ID
+        //Выбираем вариант получения товара:
+        cartPage.deliveryBox.choosePickUp(); //Самовывоз
         //выбираем город для самовывоза
         cartPage.deliveryBox.cityList.findCity(CITY);
         //жмем кнопку "Оформить заказ"
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
 
-        //Страница авторизации
+        //Страница авторизации:
         AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
-        //Купить без авторизации:
+        //Купить без авторизации
         authorizationPage.buyWithoutRegistration(); //нажали кнопку "Купить без авторизации"
         //проверяем редирект на страницу выбора магазина:
         urlContains("personal/order_self_delivery"); //если самовывоз
@@ -88,11 +87,11 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         //Страница подтверждения
         SummaryPage summaryPage = pageByClass(SummaryPage.class);
         //Заполняем поля
-        summaryPage.setFirstName(FIRST_NAME);
-        summaryPage.setLastName(LAST_NAME);
+   //     summaryPage.setFirstName(FIRST_NAME);
+   //     summaryPage.setLastName(LAST_NAME);
         summaryPage.setPhoneCode(PHONE_CODE);
         summaryPage.setPhoneNumber(PHONE_NUM);
-        summaryPage.setEmail(EMAIL);
+  //      summaryPage.setEmail(EMAIL);
         //Жмем "Подтвердить"
         summaryPage.submit();
 
