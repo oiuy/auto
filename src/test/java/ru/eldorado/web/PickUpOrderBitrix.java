@@ -39,6 +39,10 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
         //Главная страница
         MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
+        //Выбор другого региона:
+        /*MainPage mainPage = openPage("/", MainPage.class);
+        mainPage.headerPanel.headerRegion.regionConfirmPopup.clickNo();
+        mainPage.selectRegion("Волгоград");*/
         //ищем товар по н/н
         mainPage.findItem(ITEM_ID);
 
@@ -87,11 +91,11 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         //Страница подтверждения
         SummaryPage summaryPage = pageByClass(SummaryPage.class);
         //Заполняем поля
-   //     summaryPage.setFirstName(FIRST_NAME);
-   //     summaryPage.setLastName(LAST_NAME);
+        summaryPage.setFirstName(FIRST_NAME);
+        summaryPage.setLastName(LAST_NAME);
         summaryPage.setPhoneCode(PHONE_CODE);
         summaryPage.setPhoneNumber(PHONE_NUM);
-  //      summaryPage.setEmail(EMAIL);
+        summaryPage.setEmail(EMAIL);
         //Жмем "Подтвердить"
         summaryPage.submit();
 
