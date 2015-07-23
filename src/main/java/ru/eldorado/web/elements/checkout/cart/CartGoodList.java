@@ -36,7 +36,7 @@ public class CartGoodList extends AbstractElement {
         return 0;
     }
 
-    //Bitrix function:
+    //Bitrix functions:
     public void setProductCount (String product, String count) {
         for (int i=1; i <= items.size(); i=i+2)
        {
@@ -47,6 +47,18 @@ public class CartGoodList extends AbstractElement {
            }
        }
         throw new AssertionError("Item ¹:" + product + " not found!");
+    }
+
+    public void selectAdditionalService (String product, String type) {
+        for (int i=1; i<= items.size(); i=i+2)
+        {
+            CartGoodItem cartGoodItem = initContainer(items.get(i), CartGoodItem.class);
+            if (cartGoodItem.getCode().equals(product)){
+                cartGoodItem.selectService(type);
+                return;
+            }
+        }
+        throw new AssertionError("There's no:" + type + "fot item ¹:" + product);
     }
 
 }

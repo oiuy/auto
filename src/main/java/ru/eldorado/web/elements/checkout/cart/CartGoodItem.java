@@ -11,6 +11,7 @@ import ru.eldorado.web.elements.AbstractElement;
 import java.util.List;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static java.sql.DriverManager.getDriver;
 
 public class CartGoodItem extends AbstractElement {
     @FindBy(how = How.CSS, css = ".countProd")
@@ -32,5 +33,15 @@ public class CartGoodItem extends AbstractElement {
 
     public void setCount(String value) {
         countField.setValue(value); }
+
+    public void selectService (String type) {
+        WebDriver driver = getWebDriver();
+        List<WebElement> checks = driver.findElements(By.className("checkbox"));
+        for(WebElement check : checks){
+            if (check.getAttribute("rel").contains(type) & !check.getAttribute("rel").contains("0"))
+            {check.click();
+             return;}
+        }
+    }
 
 }

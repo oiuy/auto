@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
     private final static String ITEM_ID = "71055750";
-    //private final static String ITEM_ID2 = "71042152";
+    private final static String ITEM_ID2 = "71042152";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
@@ -49,7 +49,7 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         int itemsPrice = product.getPrice(); //запоминаем цену товара
 
         //Чтобы найти и добавить в корзину ещё один товар:
-        /* resultsPage.findItem(ITEM_ID2); // ищем товар по н/н
+        resultsPage.findItem(ITEM_ID2); // ищем товар по н/н
         product = resultsPage.goodsList.addFirstToCart(); // добавляем его в корзину
         itemsPrice = itemsPrice + product.getPrice(); //добавляем цену товара в сумму заказа*/
 
@@ -63,7 +63,8 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
 
         //Корзина
         CartPage cartPage = pageByClass(CartPage.class);
-        cartPage.cartGoodList.setProductCount(ITEM_ID, "3"); //устанавилваем количество товара с кодом ITEM_ID
+        cartPage.cartGoodList.setProductCount(ITEM_ID, "3"); //устанавилваем количество товара ITEM_ID
+        cartPage.cartGoodList.selectAdditionalService(ITEM_ID2, "express"); //выбираем ЭС для товара ITEM_ID2
         //выбираем вариант получения товара:
         cartPage.deliveryBox.choosePickUp(); //самовывоз
         //выбираем город для самовывоза
