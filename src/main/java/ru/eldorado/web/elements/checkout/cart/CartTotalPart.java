@@ -20,8 +20,13 @@ public class CartTotalPart extends AbstractElement {
     @FindBy(how = How.ID, id = "total_price_id")
     private SelenideElement total;
 
+    // нопка "ќформить" в ’айбрис:
     @FindBy(how = How.CSS, css = ".doCheckoutBut")
     private SelenideElement doCheckoutButton;
+
+    // нопка "ќформить" в Ѕитрикс:
+    @FindBy(how = How.CSS, css = ".successBttn")
+    private SelenideElement checkoutBitrix;
 
     public int deliveryCost() {
         try {
@@ -55,6 +60,6 @@ public class CartTotalPart extends AbstractElement {
     }
 
     public void checkout() {
-        doCheckoutButton.click();
+        checkoutBitrix.click();
     }
 }

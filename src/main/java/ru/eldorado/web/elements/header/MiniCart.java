@@ -18,8 +18,13 @@ public class MiniCart extends AbstractElement {
     @FindBy(how = How.ID, id = "basketCost")
     public SelenideElement basketCost;
 
+    //—сылка на корзину в ’айбрис:
     @FindBy(how = How.ID, id = "cartLink")
     public SelenideElement cartLink;
+
+    //—сылка на корзину в Ѕитрикс:
+    @FindBy(how = How.CSS, css = ".headerCartLink")
+    public SelenideElement cartLinkBitrix;
 
     public boolean isBasketEmpty() {
         return basketEmpty.isDisplayed();
@@ -44,6 +49,7 @@ public class MiniCart extends AbstractElement {
     }
 
     public void goToCart() {
-        cartLink.click();
+        cartLinkBitrix.click();
     }
+
 }

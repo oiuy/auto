@@ -1,5 +1,6 @@
 package ru.eldorado.web.pages.checkout;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.checkout.cart.CartDelivery;
@@ -20,4 +21,5 @@ public class CartPage extends WithNavigationPage {
 
     @FindBy(how = How.ID, id = "cartItemPopup")
     public CartPopup cartPopup;
+
 }

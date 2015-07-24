@@ -7,11 +7,27 @@ import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.AbstractElement;
 
 public class CartDelivery extends AbstractElement {
-    private static final String PICKUP = "РЎР°РјРѕРІС‹РІРѕР·";
-    private static final String DELIVERY = "Р”РѕСЃС‚Р°РІРєР°.*";
+    private static final String PICKUP = "Самовывоз";
+    private static final String DELIVERY = "Доставка.*";
 
+    //Самовывоз для Хайбрис
     @FindBy(how = How.ID, id = "delivery_radio_pickup-styler")
     private SelenideElement pickUp;
+
+    //Самовывоз для Битркис
+    @FindBy(how = How.ID, id = "delivery_radio_26-styler")
+    private SelenideElement getPickUpBitrix;
+
+    //Доставка для Битрикс
+    @FindBy(how = How.ID, id = "delivery_radio_35-styler")
+    private  SelenideElement deliveryBitrix;
+
+    //Список городов:
+    @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
+    private SelenideElement selectFrame;
+
+    @FindBy(how = How.CSS, css = ".cusel-scroll-wrap")
+    public CartCityList cityList;
 
     public boolean isPickUp() {
         return getSelf().findElement(By.className("checkedBlock")).
@@ -24,6 +40,12 @@ public class CartDelivery extends AbstractElement {
     }
 
     public void choosePickUp() {
-        pickUp.click();
+        getPickUpBitrix.click();
+        selectFrame.click();
     }
+
+    public void chooseDelivery() {
+        deliveryBitrix.click();
+    }
+
 }

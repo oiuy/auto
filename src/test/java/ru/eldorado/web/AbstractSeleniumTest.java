@@ -4,6 +4,7 @@ import com.codeborne.selenide.junit.BrowserStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.eldorado.web.conditions.CheckRedirect;
 import ru.eldorado.web.conditions.UrlContains;
@@ -16,7 +17,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class AbstractSeleniumTest {
 
-    public static final int TIME_OUT = 20;
+    public static final int TIME_OUT = 45;
 
     @Rule
     public BrowserStrategy browserStrategy = new BrowserStrategy();
@@ -58,5 +59,10 @@ public abstract class AbstractSeleniumTest {
 
     public WebDriverWait driverWait() {
         return new WebDriverWait(getWebDriver(), TIME_OUT);
+    }
+
+    public WebDriver getDriver() {
+        WebDriver driver = getWebDriver();
+        return driver;
     }
 }
