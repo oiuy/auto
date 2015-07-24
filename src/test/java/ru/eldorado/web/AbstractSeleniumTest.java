@@ -17,7 +17,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class AbstractSeleniumTest {
 
-    public static final int TIME_OUT = 30;
+    public static final int TIME_OUT = 45;
 
     @Rule
     public BrowserStrategy browserStrategy = new BrowserStrategy();

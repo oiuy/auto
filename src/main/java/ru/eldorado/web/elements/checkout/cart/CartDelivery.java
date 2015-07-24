@@ -2,15 +2,9 @@ package ru.eldorado.web.elements.checkout.cart;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.eldorado.web.elements.AbstractElement;
-
-import java.util.List;
-
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class CartDelivery extends AbstractElement {
     private static final String PICKUP = "Самовывоз";
@@ -26,7 +20,7 @@ public class CartDelivery extends AbstractElement {
 
     //Доставка для Битрикс
     @FindBy(how = How.ID, id = "delivery_radio_35-styler")
-    private  SelenideElement deliveryMkadBitrix;
+    private  SelenideElement deliveryBitrix;
 
     //Список городов:
     @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
@@ -51,7 +45,7 @@ public class CartDelivery extends AbstractElement {
     }
 
     public void chooseDelivery() {
-        deliveryMkadBitrix.click();
+        deliveryBitrix.click();
     }
 
 }

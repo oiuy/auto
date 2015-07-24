@@ -16,10 +16,12 @@ import java.io.FileNotFoundException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-public class PickUpOrderBitrix extends AbstractSeleniumTest {
+public class BitrixPickupTest extends AbstractSeleniumTest {
 
     private final static String ITEM_ID = "71055750";
     //private final static String ITEM_ID2 = "71042152";
+    private final static String ITEM_US = "71081676";
+    private final static String ITEM_US2 = "71083085";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
@@ -102,6 +104,54 @@ public class PickUpOrderBitrix extends AbstractSeleniumTest {
         //Последняя страница
         ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
         ORDER_NUM = thankYouPage.getOrderNumberBitrix();
+    }
+
+    @Test //самовывоз с УС:
+    public void pickupUSCreation () throws InterruptedException {
+        MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
+        mainPage.findItem(ITEM_US);
+
+        SearchResultsPage searchResultsPage = pageByClass(SearchResultsPage.class);
+        CatalogGoodItem product = searchResultsPage.goodsList.addFirstToCart();
+        int itemsPrice = product.getPrice();
+        searchResultsPage.findItem(ITEM_US2);
+        product = searchResultsPage.goodsList.addFirstToCart();
+        itemsPrice = itemsPrice + product.getPrice();
+        assertFalse(searchResultsPage.headerLogoBlock.miniCartBitrix.isBasketEmpty());
+        assertEquals(itemsPrice, searchResultsPage.headerLogoBlock.miniCartBitrix.basketCost());
+        searchResultsPage.headerLogoBlock.miniCartBitrix.goToCart();
+        urlContains("/personal/basket");
+
+        CartPage cartPage = pageByClass(CartPage.class);
+        cartPage.cartGoodList.setProductCount(ITEM_US, "2");
+        cartPage.cartGoodList.selectAdditionalService(ITEM_US, "express");
+        cartPage.cartGoodList.setProductCount(ITEM_US2, "2");
+        cartPage.deliveryBox.choosePickUp();
+        cartPage.deliveryBox.cityList.findCity(CITY);
+        cartPage.cartTotalPart.checkout();
+        urlContains("personal/order");
+
+        AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
+        authorizationPage.buyWithoutRegistration(); //нажали кнопку "Купить без авторизации"
+        urlContains("personal/order_self_delivery");
+
+        PickupPage pickupPage = pageByClass(PickupPage.class);
+        pickupPage.findShop(SHOP_ADDRESS);
+        pickupPage.shopViewBitrix.collectFromHereClick(); //жмем кнопку "Заберу отсюда"
+        urlContains("step=sd_confirm");
+
+        SummaryPage summaryPage = pageByClass(SummaryPage.class);
+        summaryPage.setFirstName(FIRST_NAME);
+        summaryPage.setLastName(LAST_NAME);
+        summaryPage.setPhoneCode(PHONE_CODE);
+        summaryPage.setPhoneNumber(PHONE_NUM);
+        summaryPage.setEmail(EMAIL);
+        summaryPage.submit();
+
+        //Последняя страница
+        ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
+        ORDER_NUM = thankYouPage.getOrderNumberBitrix();
+
     }
 
     @After
