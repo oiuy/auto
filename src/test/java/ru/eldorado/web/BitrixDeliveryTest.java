@@ -24,7 +24,7 @@ public class BitrixDeliveryTest extends AbstractSeleniumTest {
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "999test@mail.com";
-    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
+    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/delivery.txt";
     private final static String OUT_FILE = "C://Users/Osipovi/Desktop/delivery.txt";
 
     private static String ORDER_NUM = "";
@@ -54,10 +54,13 @@ public class BitrixDeliveryTest extends AbstractSeleniumTest {
         urlContains("step=address");
         //Delivery page
         DeliveryPage deliveryPage = pageByClass(DeliveryPage.class);
+        deliveryPage.selectDate("27");
+        deliveryPage.selectTime("15:00");
         deliveryPage.metro.setValue("Речной вокзал");
         deliveryPage.street.setValue("Смольная");
         deliveryPage.house.setValue("12");
         deliveryPage.flat.setValue("101");
+        deliveryPage.selectLift("грузовой");
         deliveryPage.firstName.setValue(FIRST_NAME);
         deliveryPage.lastName.setValue(LAST_NAME);
         deliveryPage.phoneCode.setValue(PHONE_CODE);

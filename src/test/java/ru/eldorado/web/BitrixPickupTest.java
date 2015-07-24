@@ -25,7 +25,7 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
-    private final static String SHOP_ADDRESS = "ТК «Л-153», Братиславская, ул. Люблинская, д.153";
+    private final static String SHOP_ADDRESS = "ул. Люблинская, д.153";
     private final static String FIRST_NAME = "Авто";
     private final static String LAST_NAME = "Тест";
     private final static String PHONE_CODE = "900";
