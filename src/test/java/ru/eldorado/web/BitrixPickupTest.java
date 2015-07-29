@@ -18,21 +18,19 @@ import static org.junit.Assert.assertEquals;
 
 public class BitrixPickupTest extends AbstractSeleniumTest {
 
-    private final static String ITEM_ID = "71055750";
+    private final static String ITEM_ID = "71078433";
     //private final static String ITEM_ID2 = "71042152";
-    private final static String ITEM_US = "71081676";
-    private final static String ITEM_US2 = "71083085";
     private final static String USER_NAME = "";
     private final static String PASSWORD = "";
     private final static String CITY = "Москва";
-    private final static String SHOP_ADDRESS = "ул. Люблинская, д.153";
+    private final static String SHOP_ADDRESS = "Октября";
     private final static String FIRST_NAME = "Авто";
     private final static String LAST_NAME = "Тест";
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "999test@mail.com";
-    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
-    private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
+    private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
+   // private final static String OUT_FILE = "C://Users/Osipovi/Desktop/out.txt";
 
     private static String ORDER_NUM = "";
 
@@ -40,11 +38,11 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
     public void pickupOrderCreation() throws InterruptedException {
 
         //Главная страница
-        MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
+        //MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
         //Выбор другого региона:
-        /*MainPage mainPage = openPage("/", MainPage.class);
+        MainPage mainPage = openPage("/", MainPage.class);
         mainPage.headerPanel.headerRegion.regionConfirmPopup.clickNo();
-        mainPage.selectRegion("Волгоград");*/
+        mainPage.selectRegion(CITY);
         //ищем товар по н/н
         mainPage.findItem(ITEM_ID);
 
@@ -69,11 +67,12 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
 
         //Корзина
         CartPage cartPage = pageByClass(CartPage.class);
-        cartPage.cartGoodList.setProductCount(ITEM_ID, "3"); //Выбираем количество товара ITEM_ID
+        cartPage.cartGoodList.setProductCount(ITEM_ID, "2"); //Выбираем количество товара ITEM_ID
         //Выбираем вариант получения товара:
         cartPage.deliveryBox.choosePickUp(); //Самовывоз
-        //выбираем город для самовывоза
-        cartPage.deliveryBox.cityList.findCity(CITY);
+        //выбираем город для самовывоза:
+        //cartPage.deliveryBox.selectFrame.click();
+        //cartPage.deliveryBox.cityList.findCity(CITY);
         //жмем кнопку "Оформить заказ"
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
@@ -108,26 +107,24 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
 
     @Test //самовывоз с УС:
     public void pickupUSCreation () throws InterruptedException {
-        MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
-        mainPage.findItem(ITEM_US);
+        MainPage mainPage = openPage("/", MainPage.class);
+        mainPage.headerPanel.headerRegion.regionConfirmPopup.clickNo();
+        mainPage.selectRegion("Набережные Челны");
+        mainPage.headerPanel.headerRegion.regionConfirmPopup.clickYes();
+        mainPage.findItem(ITEM_ID);
 
         SearchResultsPage searchResultsPage = pageByClass(SearchResultsPage.class);
         CatalogGoodItem product = searchResultsPage.goodsList.addFirstToCart();
         int itemsPrice = product.getPrice();
-        searchResultsPage.findItem(ITEM_US2);
-        product = searchResultsPage.goodsList.addFirstToCart();
-        itemsPrice = itemsPrice + product.getPrice();
         assertFalse(searchResultsPage.headerLogoBlock.miniCartBitrix.isBasketEmpty());
         assertEquals(itemsPrice, searchResultsPage.headerLogoBlock.miniCartBitrix.basketCost());
         searchResultsPage.headerLogoBlock.miniCartBitrix.goToCart();
         urlContains("/personal/basket");
 
         CartPage cartPage = pageByClass(CartPage.class);
-        cartPage.cartGoodList.setProductCount(ITEM_US, "2");
-        cartPage.cartGoodList.selectAdditionalService(ITEM_US, "express");
-        cartPage.cartGoodList.setProductCount(ITEM_US2, "2");
+        cartPage.cartGoodList.setProductCount(ITEM_ID, "2");
         cartPage.deliveryBox.choosePickUp();
-        cartPage.deliveryBox.cityList.findCity(CITY);
+//        cartPage.deliveryBox.cityList.findCity(CITY);
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
 
@@ -151,7 +148,6 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
         //Последняя страница
         ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
         ORDER_NUM = thankYouPage.getOrderNumberBitrix();
-
     }
 
     @After

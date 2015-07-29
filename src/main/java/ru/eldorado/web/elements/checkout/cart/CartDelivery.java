@@ -24,7 +24,7 @@ public class CartDelivery extends AbstractElement {
 
     //Список городов:
     @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
-    private SelenideElement selectFrame;
+    public SelenideElement selectFrame;
 
     @FindBy(how = How.CSS, css = ".cusel-scroll-wrap")
     public CartCityList cityList;
@@ -41,7 +41,6 @@ public class CartDelivery extends AbstractElement {
 
     public void choosePickUp() {
         getPickUpBitrix.click();
-        selectFrame.click();
     }
 
     public void chooseDelivery() {
