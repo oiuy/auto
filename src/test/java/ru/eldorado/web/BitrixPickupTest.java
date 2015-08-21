@@ -38,11 +38,11 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
     public void pickupOrderCreation() throws InterruptedException {
 
         //Главная страница
-        //MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
+        MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
         //Выбор другого региона:
-        MainPage mainPage = openPage("/", MainPage.class);
+        /*MainPage mainPage = openPage("/", MainPage.class);
         mainPage.headerPanel.headerRegion.regionConfirmPopup.clickNo();
-        mainPage.selectRegion(CITY);
+        mainPage.selectRegion(CITY);*/
         //ищем товар по н/н
         mainPage.findItem(ITEM_ID);
 
@@ -71,8 +71,7 @@ public class BitrixPickupTest extends AbstractSeleniumTest {
         //Выбираем вариант получения товара:
         cartPage.deliveryBox.choosePickUp(); //Самовывоз
         //выбираем город для самовывоза:
-        //cartPage.deliveryBox.selectFrame.click();
-        //cartPage.deliveryBox.cityList.findCity(CITY);
+        cartPage.deliveryBox.cityList.findCity(CITY);
         //жмем кнопку "Оформить заказ"
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
