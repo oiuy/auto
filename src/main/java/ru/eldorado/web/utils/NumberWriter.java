@@ -14,7 +14,7 @@ public class NumberWriter {
 
             FileWriter fileWriter = new FileWriter(file, true);
             try {
-                fileWriter.write(text);
+                fileWriter.write(text + "\n\r");
             } finally {
                 fileWriter.close();
             }

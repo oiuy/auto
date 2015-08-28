@@ -37,7 +37,7 @@ public class CartGoodList extends AbstractElement {
     }
 
     //Bitrix functions:
-    public void setProductCount (String product, String count) {
+    public void setProductCount (String product, int count) {
         for (int i=1; i <= items.size(); i=i+2)
        {
            CartGoodItem cartGoodItem = initContainer(items.get(i), CartGoodItem.class);

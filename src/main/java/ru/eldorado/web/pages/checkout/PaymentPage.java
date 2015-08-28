@@ -12,17 +12,24 @@ import java.util.List;
  * Created by OsipovI on 23.07.2015.
  */
 public class PaymentPage extends AbstractPage {
-    @FindBy(how = How.CSS, css = ".paymentSelectLabelHd")
-    private List<SelenideElement> payments;
 
-    @FindBy(how = How.CSS, css = ".addToCartBigCP")
+    @FindBy(how = How.CSS, css = ".checkOut__container--right")
     private SubmitButton submitButton;
 
-    public void selectCash () {payments.get(0).click();}
+    @FindBy(how = How.ID, id = "delivery_radio_1-styler")
+    private SelenideElement radioCash;
 
-    public void selectCard () {payments.get(1).click();}
+    @FindBy(how = How.ID, id = "delivery_radio_2-styler")
+    private SelenideElement radioCard;
 
-    public void secletOnline () {payments.get(2).click();}
+    @FindBy(how = How.ID, id = "delivery_radio_168-styler")
+    private SelenideElement radioOnline;
+
+    public void selectCash () {radioCash.click();}
+
+    public void selectCard () {radioCard.click();}
+
+    public void selectOnline () {radioOnline.click();}
 
     public void submit () {submitButton.click();}
 }

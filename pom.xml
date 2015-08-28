@@ -57,7 +57,7 @@
                         <port></port>
                         <vjdbc.user>admin</vjdbc.user>
                         <vjdbc.password>PlanBPassword2015!</vjdbc.password>
-                        <browser>firefox</browser>
+                        <browser>chrome</browser>
                         <remote>http://localhost:4444/wd/hub</remote>
                     </systemPropertyVariables>
                     <argLine>-Dfile.encoding=utf-8</argLine>

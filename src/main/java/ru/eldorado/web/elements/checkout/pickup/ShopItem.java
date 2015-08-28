@@ -20,5 +20,4 @@ public class ShopItem extends AbstractElement {
     public void click() {
         getSelf().click();
     }
-
 }

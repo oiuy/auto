@@ -19,7 +19,7 @@ public class PickupPage extends AbstractPage {
 
     //Выбор города для Битрикс
     @FindBy(how = How.ID, id = "cusel-scroll-one_more_select")
-    public SelectElement citySelectBitrix;
+    private SelectElement citySelectBitrix;
 
     @FindBy(how = How.ID, id = "listWrapper")
     public ShopList shopList;
@@ -30,7 +30,7 @@ public class PickupPage extends AbstractPage {
 
     //Выбранный магазин для Битрикс:
     @FindBy(how = How.CSS, css = ".pickupListRightSide")
-    public ShopView shopViewBitrix;
+    private ShopView shopViewBitrix;
 
     @FindBy(how = How.CSS, css = ".scrollbar")
     private ScrollBar scrollBar;
@@ -42,7 +42,6 @@ public class PickupPage extends AbstractPage {
             scrollBar.scrollDown();
             findShop(address);
         }
-
     }
 
  }

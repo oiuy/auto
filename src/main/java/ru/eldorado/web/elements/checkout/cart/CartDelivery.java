@@ -24,10 +24,10 @@ public class CartDelivery extends AbstractElement {
 
     //Список городов:
     @FindBy(how = How.ID, id = "cuselFrame-self_delivery_city_select")
-    public SelenideElement selectFrame;
+    private SelenideElement selectFrame;
 
     @FindBy(how = How.CSS, css = ".cusel-scroll-wrap")
-    public CartCityList cityList;
+    private CartCityList cityList;
 
     public boolean isPickUp() {
         return getSelf().findElement(By.className("checkedBlock")).
@@ -45,6 +45,11 @@ public class CartDelivery extends AbstractElement {
 
     public void chooseDelivery() {
         deliveryBitrix.click();
+    }
+
+    public void selectCity (String city) {
+        selectFrame.click();
+        cityList.findCity(city);
     }
 
 }
