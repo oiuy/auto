@@ -14,11 +14,10 @@ public class ShopItem extends AbstractElement {
     }
 
     public boolean isThis(String title) {
-        return getTitle().equals(title);
+        return getTitle().contains(title);
     }
 
     public void click() {
         getSelf().click();
     }
-
 }

@@ -1,9 +1,6 @@
 package ru.eldorado.web.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 /**
  * Created by OsipovI on 15.07.2015.
@@ -15,11 +12,11 @@ public class NumberWriter {
         try {
             if(!file.exists()){ file.createNewFile();}
 
-            PrintWriter printWriter = new PrintWriter(file.getAbsoluteFile());
+            FileWriter fileWriter = new FileWriter(file, true);
             try {
-                printWriter.println(text);
+                fileWriter.write(text + "\n\r");
             } finally {
-                printWriter.close();
+                fileWriter.close();
             }
 
         } catch (IOException e) { throw new RuntimeException(e);}

@@ -29,8 +29,8 @@ public class OrderPickUpCreationTest extends AbstractSeleniumTest {
 
         // переходим в категорию
         MainPage mainPage = openPageAndRightRegion("/", MainPage.class);
-        String categoryUrl = mainPage.catalogNav.subCategoryClick(CATEGORY, SUBCATEGORY);
-        checkRedirect(categoryUrl);
+       // String categoryUrl = mainPage.catalogNav.subCategoryClick(CATEGORY, SUBCATEGORY);
+        //checkRedirect(categoryUrl);
 
         // получаем Page Object категории
         SubCategoryPage subCategoryPage = pageByClass(SubCategoryPage.class);
@@ -71,7 +71,7 @@ public class OrderPickUpCreationTest extends AbstractSeleniumTest {
         AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
 
         // нажимаем купить без регистрации
-        authorizationPage.buyWithoutRegistration();
+      //  authorizationPage.buyWithoutRegistration();
         urlContains("/ru/checkout/multi/choose-pickup-location");
 
         // получаем Page Object страницы выбора места самовывоза

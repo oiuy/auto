@@ -13,6 +13,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 public class CartGoodItem extends AbstractElement {
+
     @FindBy(how = How.CSS, css = ".countProd")
     private SelenideElement countField;
 
@@ -22,6 +23,15 @@ public class CartGoodItem extends AbstractElement {
     }*/
 
     //Для Битрикс:
+    @FindBy(how = How.CSS, css = ".qs-side-right")
+    private SelenideElement plusButton;
+
+    @FindBy(how = How.CSS, css = ".qs-side-left")
+    private SelenideElement minusButton;
+
+    @FindBy(how = How.CSS, css = ".qs-side-center")
+    private SelenideElement countFieldContainer;
+
     public String getCode() {
        return getSelf().getAttribute("product-xml-id").trim();
     }
@@ -30,8 +40,10 @@ public class CartGoodItem extends AbstractElement {
         return Integer.valueOf(countField.val());
     }
 
-    public void setCount(String value) {
-        countField.setValue(value); }
+    public void setCount(int count) {
+        for (int i = 1; i < count; i++)
+        {plusButton.click();}
+    }
 
     public void selectService (String type) {
         WebDriver driver = getWebDriver();

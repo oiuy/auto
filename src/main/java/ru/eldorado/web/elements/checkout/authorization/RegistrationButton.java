@@ -9,7 +9,7 @@ import ru.eldorado.web.elements.AbstractElement;
  * Created by OsipovI on 23.07.2015.
  */
 public class RegistrationButton extends AbstractElement {
-    @FindBy (how = How.CSS, css = ".addToCartBigCP")
+    @FindBy (how = How.CSS, css = ".button")
     private SelenideElement button;
 
     public void click () {

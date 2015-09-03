@@ -2,6 +2,7 @@ package ru.eldorado.web;
 
 import org.junit.After;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import ru.eldorado.web.elements.catalog.CatalogGoodItem;
 import ru.eldorado.web.pages.MainPage;
 import ru.eldorado.web.pages.catalog.SearchResultsPage;
@@ -24,7 +25,7 @@ public class BitrixDeliveryTest extends AbstractSeleniumTest {
     private final static String PHONE_CODE = "900";
     private final static String PHONE_NUM = "9012233";
     private final static String EMAIL = "999test@mail.com";
-    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/orders.txt";
+    //private final static String OUT_FILE = "G://Отделы/IT/ОПП/Группа тестирования/Autotest_orders/delivery.txt";
     private final static String OUT_FILE = "C://Users/Osipovi/Desktop/delivery.txt";
 
     private static String ORDER_NUM = "";
@@ -44,26 +45,30 @@ public class BitrixDeliveryTest extends AbstractSeleniumTest {
         urlContains("/personal/basket");
         //Cart page
         CartPage cartPage = pageByClass(CartPage.class);
-        cartPage.cartGoodList.setProductCount(ITEM_ID, "2");
+        cartPage.cartGoodList.setProductCount(ITEM_ID, 2);
         cartPage.deliveryBox.chooseDelivery(); //выбираем доставку
         cartPage.cartTotalPart.checkout();
         urlContains("personal/order");
         //Authorization page
         AuthorizationPage authorizationPage = pageByClass(AuthorizationPage.class);
-        authorizationPage.buyWithoutRegistration();
+        authorizationPage.noRegistration();
         urlContains("step=address");
         //Delivery page
         DeliveryPage deliveryPage = pageByClass(DeliveryPage.class);
+        deliveryPage.personalBlock.firstName.setValue(FIRST_NAME);
+        deliveryPage.personalBlock.lastName.setValue(LAST_NAME);
+        deliveryPage.personalBlock.phoneCode.setValue(PHONE_CODE);
+        deliveryPage.personalBlock.phoneNumber.setValue(PHONE_NUM);
+        deliveryPage.personalBlock.email.setValue(EMAIL);
+        deliveryPage.setTime("15:00");
         deliveryPage.metro.setValue("Речной вокзал");
         deliveryPage.street.setValue("Смольная");
+        deliveryPage.street.sendKeys(Keys.ARROW_DOWN);
+        deliveryPage.street.sendKeys(Keys.ENTER); //dropdown list
         deliveryPage.house.setValue("12");
         deliveryPage.flat.setValue("101");
-        deliveryPage.firstName.setValue(FIRST_NAME);
-        deliveryPage.lastName.setValue(LAST_NAME);
-        deliveryPage.phoneCode.setValue(PHONE_CODE);
-        deliveryPage.phoneNumber.setValue(PHONE_NUM);
-        deliveryPage.email.setValue(EMAIL);
         deliveryPage.submit();
+
         urlContains("step=payment");
         //Payment page
         PaymentPage paymentPage = pageByClass(PaymentPage.class);
@@ -75,6 +80,7 @@ public class BitrixDeliveryTest extends AbstractSeleniumTest {
         summaryPage.submit();
         //Last page
         ThankYouPage thankYouPage = pageByClass(ThankYouPage.class);
+        Thread.sleep(1000);
         ORDER_NUM = thankYouPage.getOrderNumberBitrix();
     }
 

@@ -27,7 +27,7 @@ public class CartDelivery extends AbstractElement {
     private SelenideElement selectFrame;
 
     @FindBy(how = How.CSS, css = ".cusel-scroll-wrap")
-    public CartCityList cityList;
+    private CartCityList cityList;
 
     public boolean isPickUp() {
         return getSelf().findElement(By.className("checkedBlock")).
@@ -41,11 +41,15 @@ public class CartDelivery extends AbstractElement {
 
     public void choosePickUp() {
         getPickUpBitrix.click();
-        selectFrame.click();
     }
 
     public void chooseDelivery() {
         deliveryBitrix.click();
+    }
+
+    public void selectCity (String city) {
+        selectFrame.click();
+        cityList.findCity(city);
     }
 
 }

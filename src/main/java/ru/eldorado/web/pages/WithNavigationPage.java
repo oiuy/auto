@@ -11,10 +11,10 @@ public abstract class WithNavigationPage extends AbstractPage {
     @FindBy(how = How.CSS, css = ".headerPanel")
     public HeaderPanel headerPanel;
 
-    @FindBy(how = How.CSS, css = ".headerNav")
-    public CatalogNav catalogNav;
+/*    @FindBy(how = How.CSS, css = ".headerNav")
+    public CatalogNav catalogNav;*/
 
-    @FindBy(how = How.CSS, css = ".headerLogoBlock")
+    @FindBy(how = How.CSS, css = ".logo-container")
     public HeaderLogoBlock headerLogoBlock;
 
     @FindBy(how = How.ID, id = "search_line")

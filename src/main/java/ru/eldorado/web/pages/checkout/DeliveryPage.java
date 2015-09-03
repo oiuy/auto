@@ -3,8 +3,8 @@ package ru.eldorado.web.pages.checkout;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import ru.eldorado.web.elements.checkout.authorization.RegistrationButton;
-import ru.eldorado.web.elements.checkout.delivery.DeliveryCalendar;
+import ru.eldorado.web.elements.checkout.delivery.OptionsContainer;
+import ru.eldorado.web.elements.checkout.delivery.PersonalInfoBlock;
 import ru.eldorado.web.elements.checkout.delivery.SubmitButton;
 import ru.eldorado.web.pages.AbstractPage;
 
@@ -14,7 +14,18 @@ import java.util.List;
  * Created by OsipovI on 23.07.2015.
  */
 public class DeliveryPage extends AbstractPage {
+    //personal info block
+    @FindBy(how = How.CSS, css = ".checkOut__container--left-block")
+    public PersonalInfoBlock personalBlock;
 
+    //date & time block
+    @FindBy(how = How.ID, id = "q-delivery-time")
+    private SelenideElement timeContainer;
+
+    @FindBy(how = How.CSS, css = ".q-delivery-time-item")
+    private List<SelenideElement> timeList;
+
+    //address block
     @FindBy(how = How.ID, id = "metro_dropdown")
     public SelenideElement metro;
 
@@ -39,26 +50,21 @@ public class DeliveryPage extends AbstractPage {
     @FindBy(how = How.NAME, name = "ORDER_PROP_44")
     public SelenideElement code;
 
-    @FindBy(how = How.ID, id = "deliveryContactName")
-    public SelenideElement firstName;
-
-    @FindBy(how = How.ID, id = "deliveryContactLastName")
-    public SelenideElement lastName;
-
-    @FindBy(how = How.NAME, name = "mobile_phone_code")
-    public SelenideElement phoneCode;
-
-    @FindBy(how = How.NAME, name = "mobile_phone_phone")
-    public SelenideElement phoneNumber;
-
-    @FindBy(how = How.NAME, name = "ORDER_PROP_6")
-    public SelenideElement email;
-
-    @FindBy(how = How.CSS, css = ".addToCartBigCP")
+    @FindBy(how = How.CSS, css = ".checkOut__container--right")
     private SubmitButton submitButton;
+
 
     public void submit() {
         submitButton.click();
+    }
+
+    public void setTime (String time) {
+        timeContainer.click();
+        for(SelenideElement item : timeList) {
+            if (item.text().contains(time)) {
+                item.click();
+            }
+        }
     }
 
 }

@@ -4,7 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import ru.eldorado.web.elements.AbstractElement;
 
 public class CatalogGoodList extends AbstractElement {
-    private static final String GOODS_CSS = "div.goodsList div.item";
+    private static final String GOODS_CSS = ".goodsList div.item";
 
     public CatalogGoodItem addFirstToCart() {
         ElementsCollection items = getSelf().findAll(GOODS_CSS);
